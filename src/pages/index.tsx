@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { getImages } from "@/api/images-landing";
 import { ResponseImage } from "@/types/image-random";
+import { getImageRandom } from "@/api/image-random";
 
 export default function Home() {
   const [images, setImages] = useState<ResponseImage[]>();
-  // const [imageRandom, setImageRandom] = useState();
+  const [imageRandom, setImageRandom] = useState<ResponseImage>();
 
   useEffect(() => {
     getImages().then((data) => {
       setImages(data);
     });
   }, []);
-
-  // useEffect(() => {
-  //   getImageRandom().then((data) => {
-  //     console.log(data);
-  //   });
-  // }, []);
 
   const imagesRender = images?.map((image) => {
     return (
@@ -31,17 +26,22 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {/* <button
+      <button
         className="rounded"
         onClick={() => {
           getImageRandom().then((data) => {
-            setImages(data);
+            setImageRandom(data);
           });
         }}
       >
         Random Photos
-      </button> */}
-      <div className="columns-5 gap-6">{imagesRender}</div>
+      </button>
+
+      {imageRandom ? (
+        <img src={imageRandom.urls.thumb} />
+      ) : (
+        <div className="columns-5 gap-6">{imagesRender}</div>
+      )}
     </main>
   );
 }
