@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { getImages } from "@/api/images-landing";
-import { getImageRandom } from "@/api/image-random";
-import { ImagesObjectType } from "../types/images-landing";
+import { ResponseImage } from "@/types/image-random";
 
 export default function Home() {
-  const [images, setImages] = useState<ImagesObjectType[]>();
+  const [images, setImages] = useState<ResponseImage[]>();
   // const [imageRandom, setImageRandom] = useState();
 
   useEffect(() => {

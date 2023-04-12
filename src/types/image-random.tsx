@@ -1,4 +1,4 @@
-export interface ImageRandom {
+export interface ResponseImage {
   id: string;
   created_at: string;
   updated_at: string;
