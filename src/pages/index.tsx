@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ResponseImage } from "@/types/response-image";
 import { getImages } from "@/api/images-landing";
 import { getSearchedImages } from "@/api/image-search";
 import { getImageRandom } from "@/api/image-random";
 
-export default function Home() {
-  const [images, setImages] = useState<ResponseImage[]>();
+export const getServerSideProps = async () => {
+  const response = await getImages(1);
+
+  return { props: { response } };
+};
+
+type Props = { response?: ResponseImage[] };
+
+export default function Home(props: Props) {
+  const [images, setImages] = useState<ResponseImage[] | undefined>(
+    props.response
+  );
   const [imageRandom, setImageRandom] = useState<ResponseImage>();
   const [querySearchedImage, setQuerySearchedImage] = useState<string>();
   const [counterPage, setCounterPage] = useState<number>(1);
-
-  useEffect(() => {
-    getImages(counterPage).then((data) => {
-      setImages(data);
-    });
-  }, []);
 
   const imagesRender = images?.map((image) => {
     return (
