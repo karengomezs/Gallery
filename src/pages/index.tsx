@@ -19,7 +19,7 @@ export default function Home() {
   const imagesRender = images?.map((image) => {
     return (
       <img
-        className="w-full  mb-6"
+        className="w-full rounded-md"
         key={image.id}
         src={image.urls.thumb}
         alt=""
@@ -79,7 +79,7 @@ export default function Home() {
       {imageRandom ? (
         <img src={imageRandom.urls.thumb} />
       ) : (
-        <div className="columns-5 gap-6">{imagesRender}</div>
+        <div className="grid grid-cols-5 gap-5">{imagesRender}</div>
       )}
 
       <div className="flex justify-center min-w-full pt-20">
@@ -87,9 +87,10 @@ export default function Home() {
           <button
             className="rounded  bg-slate-300 border-slate-400 border-2 p-1"
             onClick={() => {
-              setCounterPage(counterPage + 1);
+              const nextPage = counterPage + 1;
+              setCounterPage(nextPage);
 
-              getImages(counterPage).then((data) => {
+              getImages(nextPage).then((data) => {
                 let newPhotos: ResponseImage[] = [];
                 if (images) {
                   newPhotos = [...images];

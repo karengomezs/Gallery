@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.masonry {
+  display: grid;
+  grid-template-rows: masonry;
+  grid-template-columns: repeat(5, 1fr);
+}
