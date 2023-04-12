@@ -1,5 +1,5 @@
 //api.unsplash.com/search/photos?page=1&per_page=20&query=office&client_id=lMfe_skeTgApsSyvLqIUzUXEjSVHD6oJUauK2CdOS-4
-import { ResponseSearchedImage } from "@/types/new";
+import { ResponseSearchedImage } from "@/types/response-searched-image";
 type UrlType = string;
 
 function getRandomInt(max: number): number {
@@ -12,7 +12,9 @@ const apiKey = `client_id=lMfe_skeTgApsSyvLqIUzUXEjSVHD6oJUauK2CdOS-4`;
 const baseUrl: UrlType = `https://api.unsplash.com/search/photos?${pageNumber}&${numberPerPage}`;
 
 export async function getSearchedImages(params: string) {
-  const url: UrlType = `${baseUrl}&query=${params}&${apiKey}`;
+  const url: UrlType = `${baseUrl}&query=${encodeURIComponent(
+    params
+  )}&${apiKey}`;
   try {
     const response = await fetch(url);
     const data: ResponseSearchedImage = await response.json();
