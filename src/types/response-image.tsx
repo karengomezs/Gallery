@@ -14,8 +14,18 @@ export interface ResponseImage {
   likes: number;
   liked_by_user: boolean;
   current_user_collections: any[];
-  sponsorship: Sponsorship | null;
-  topic_submissions: Topicsubmissions;
+  sponsorship: Sponsorship | null | any;
+  topic_submissions:
+    | Topicsubmissions
+    | {
+        "business-work"?: Businesswork;
+        interiors?: Businesswork;
+        wallpapers?: Businesswork;
+        "current-events"?: Businesswork;
+        entrepreneur?: Businesswork;
+        "architecture-interior"?: Architectureinterior;
+        work?: Businesswork;
+      };
   user: User;
   exif?: Exif;
   location?: Location;
@@ -293,7 +303,7 @@ interface User {
 interface Social {
   instagram_username: string;
   portfolio_url: string;
-  twitter_username?: any;
+  twitter_username?: any | string;
   paypal_email?: any;
 }
 
@@ -329,4 +339,13 @@ export interface Urls {
   small: string;
   thumb: string;
   small_s3: string;
+}
+
+interface Businesswork {
+  status: string;
+  approved_on: string;
+}
+interface Architectureinterior {
+  status: string;
+  approved_on?: string;
 }
