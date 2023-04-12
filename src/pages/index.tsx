@@ -26,7 +26,7 @@ export default function Home(props: Props) {
         className="w-full rounded-md"
         key={image.id}
         src={image.urls.thumb}
-        alt=""
+        loading="lazy"
       />
     );
   });
