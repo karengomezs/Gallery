@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ResponseImage } from "@/types/response-image";
 import { getImages } from "@/api/images-landing";
 import { getSearchedImages } from "@/api/image-search";
+import { Button } from "@/components/Button";
 import Link from "next/link";
 
 export const getServerSideProps = async () => {
@@ -44,18 +45,17 @@ export default function Home(props: Props) {
         />
 
         <div className="flex justify-end gap-4">
-          <button
-            className="rounded bg-slate-300 border-slate-400 border-2 p-1 h-9"
-            onClick={() => {
+          <Button
+            name="Search"
+            onclick={() => {
               if (querySearchedImage) {
                 getSearchedImages(querySearchedImage).then((data) => {
                   setImages(data?.results);
                 });
               }
             }}
-          >
-            Search
-          </button>
+          />
+
           {
             <Link href="/random">
               <button className="rounded bg-slate-300 border-slate-400 border-2 p-1 h-9">
