@@ -16,7 +16,7 @@ export default function Home(props: Props) {
   const [images, setImages] = useState<ResponseImage[] | undefined>(
     props.response
   );
-  const [imageRandom, setImageRandom] = useState<ResponseImage>();
+
   const [querySearchedImage, setQuerySearchedImage] = useState<string>();
   const [counterPage, setCounterPage] = useState<number>(1);
 
@@ -66,36 +66,30 @@ export default function Home(props: Props) {
         </div>
       </div>
 
-      {/* {imageRandom ? (
-        <img src={imageRandom.urls.thumb} />
-      ) : (
-        <div className="grid grid-cols-5 gap-5">{imagesRender}</div>
-      )} */}
+      <div className="grid grid-cols-5 gap-5">{imagesRender}</div>
 
       <div className="flex justify-center min-w-full pt-20">
-        {!imageRandom && (
-          <button
-            className="rounded  bg-slate-300 border-slate-400 border-2 p-1"
-            onClick={() => {
-              const nextPage = counterPage + 1;
-              setCounterPage(nextPage);
+        <button
+          className="rounded  bg-slate-300 border-slate-400 border-2 p-1"
+          onClick={() => {
+            const nextPage = counterPage + 1;
+            setCounterPage(nextPage);
 
-              getImages(nextPage).then((data) => {
-                let newPhotos: ResponseImage[] = [];
-                if (images) {
-                  newPhotos = [...images];
-                }
+            getImages(nextPage).then((data) => {
+              let newPhotos: ResponseImage[] = [];
+              if (images) {
+                newPhotos = [...images];
+              }
 
-                if (data) {
-                  newPhotos = [...newPhotos, ...data];
-                }
-                setImages(newPhotos);
-              });
-            }}
-          >
-            Load More
-          </button>
-        )}
+              if (data) {
+                newPhotos = [...newPhotos, ...data];
+              }
+              setImages(newPhotos);
+            });
+          }}
+        >
+          Load More
+        </button>
       </div>
     </main>
   );
