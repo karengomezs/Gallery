@@ -23,12 +23,14 @@ export default function Home(props: Props) {
 
   const imagesRender = images?.map((image) => {
     return (
-      <img
-        className="w-full rounded-md"
-        key={image.id}
-        src={image.urls.thumb}
-        loading="lazy"
-      />
+      <div className="max-w-[200px]">
+        <img
+          className="rounded-md h-full object-cover"
+          key={image.id}
+          src={image.urls.small}
+          loading="lazy"
+        />
+      </div>
     );
   });
 
@@ -64,11 +66,11 @@ export default function Home(props: Props) {
         </div>
       </div>
 
-      <div className="grid grid-cols-5 gap-5">{imagesRender}</div>
+      <div className="flex flex-wrap justify-center gap-3">{imagesRender}</div>
 
       <div className="flex justify-center min-w-full pt-20">
         <Button
-          name=" Load More"
+          name="Load More"
           onclick={() => {
             const nextPage = counterPage + 1;
             setCounterPage(nextPage);
@@ -90,3 +92,4 @@ export default function Home(props: Props) {
     </main>
   );
 }
+// grid grid-cols-4 gap-3 auto-rows-[200px]

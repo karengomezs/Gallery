@@ -2,6 +2,7 @@ import { ResponseImage } from "@/types/response-image";
 import { getImageRandom } from "@/api/image-random";
 import { useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/Button";
 
 export const getServerSideProps = async () => {
   const response = await getImageRandom();
@@ -25,14 +26,12 @@ export default function Random(props: Props) {
       </h1>
       {imageRandom && (
         <Link href="/">
-          <button
-            className="rounded bg-slate-300 border-slate-400 border-2 p-1"
-            onClick={() => {
+          <Button
+            name="Go Back Home"
+            onclick={() => {
               setImageRandom(undefined);
             }}
-          >
-            Go Back Home
-          </button>
+          />
         </Link>
       )}
       <img src={imageRandom?.urls.small} />
