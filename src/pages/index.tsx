@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ResponseImage } from "@/types/response-image";
 import { getImages } from "@/api/images-landing";
 import { getSearchedImages } from "@/api/image-search";
-import { getImageRandom } from "@/api/image-random";
+import Link from "next/link";
 
 export const getServerSideProps = async () => {
   const response = await getImages(1);
@@ -56,35 +56,21 @@ export default function Home(props: Props) {
           >
             Search
           </button>
-          <button
-            className="rounded bg-slate-300 border-slate-400 border-2 p-1 h-9"
-            onClick={() => {
-              getImageRandom().then((data) => {
-                setImageRandom(data);
-              });
-            }}
-          >
-            Random Photo
-          </button>
-
-          {imageRandom && (
-            <button
-              className="rounded bg-slate-300 border-slate-400 border-2 p-1"
-              onClick={() => {
-                setImageRandom(undefined);
-              }}
-            >
-              Get Back
-            </button>
-          )}
+          {
+            <Link href="/random">
+              <button className="rounded bg-slate-300 border-slate-400 border-2 p-1 h-9">
+                Random Photo
+              </button>
+            </Link>
+          }
         </div>
       </div>
 
-      {imageRandom ? (
+      {/* {imageRandom ? (
         <img src={imageRandom.urls.thumb} />
       ) : (
         <div className="grid grid-cols-5 gap-5">{imagesRender}</div>
-      )}
+      )} */}
 
       <div className="flex justify-center min-w-full pt-20">
         {!imageRandom && (
