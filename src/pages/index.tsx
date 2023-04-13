@@ -35,8 +35,8 @@ export default function Home(props: Props) {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="flex justify-end gap-4 min-w-full pb-10 pr-10">
+    <main className="flex min-h-screen flex-col items-center justify-between px-20 pb-10">
+      <nav className="bg-gray-900 w-screen px-40 py-5 mb-10 flex gap-4">
         <input
           onChange={(e) => {
             setQuerySearchedImage(e?.target?.value);
@@ -46,29 +46,25 @@ export default function Home(props: Props) {
           placeholder="Search Image"
         />
 
-        <div className="flex justify-end gap-4">
-          <Button
-            name="Search"
-            onclick={() => {
-              if (querySearchedImage) {
-                getSearchedImages(querySearchedImage).then((data) => {
-                  setImages(data?.results);
-                });
-              }
-            }}
-          />
+        <Button
+          name="Search"
+          onclick={() => {
+            if (querySearchedImage) {
+              getSearchedImages(querySearchedImage).then((data) => {
+                setImages(data?.results);
+              });
+            }
+          }}
+        />
 
-          {
-            <Link href="/random">
-              <Button name="Random Photo" />
-            </Link>
-          }
-        </div>
-      </div>
+        <Link href="/random">
+          <Button name="Random Photo" />
+        </Link>
+      </nav>
 
       <div className="flex flex-wrap justify-center gap-3">{imagesRender}</div>
 
-      <div className="flex justify-center min-w-full pt-20">
+      <div className="flex justify-center min-w-full pt-10">
         <Button
           name="Load More"
           onclick={() => {
