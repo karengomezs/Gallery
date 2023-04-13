@@ -1,4 +1,9 @@
-export function Button({ name, onclick }: any) {
+type Props = {
+  name: string;
+  onclick?: React.MouseEventHandler<HTMLButtonElement>;
+};
+
+export function Button({ name, onclick }: Props) {
   return (
     <button
       onClick={onclick}
