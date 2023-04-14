@@ -2,19 +2,17 @@
 import { ResponseSearchedImage } from "@/types/response-searched-image";
 type UrlType = string;
 
-function getRandomInt(max: number): number {
-  return Math.floor(Math.random() * max);
-}
-
-const pageNumber = `page=${getRandomInt(30)}`;
 const numberPerPage = `per_page=20`;
 const apiKey = `client_id=lMfe_skeTgApsSyvLqIUzUXEjSVHD6oJUauK2CdOS-4`;
-const baseUrl: UrlType = `https://api.unsplash.com/search/photos?${pageNumber}&${numberPerPage}`;
+const baseUrl: UrlType = `https://api.unsplash.com/search/photos?${numberPerPage}`;
 
-export async function getSearchedImages(params: string) {
+export async function getSearchedImages(
+  params: string,
+  pageNumber: number = 1
+) {
   const url: UrlType = `${baseUrl}&query=${encodeURIComponent(
     params
-  )}&${apiKey}`;
+  )}&page=${pageNumber} &${apiKey}`;
   try {
     const response = await fetch(url);
     const data: ResponseSearchedImage = await response.json();

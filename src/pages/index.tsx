@@ -2,9 +2,9 @@ import { useState } from "react";
 import { ResponseImage } from "@/types/response-image";
 import { getImages } from "@/api/images-landing";
 import { getSearchedImages } from "@/api/image-search";
+import { ResponseSearchedImage } from "@/types/response-searched-image";
 import { Button } from "@/components/Button";
 import Link from "next/link";
-import Image from "next/image";
 
 export const getServerSideProps = async () => {
   const response = await getImages(1);
@@ -18,22 +18,12 @@ export default function Home(props: Props) {
   const [images, setImages] = useState<ResponseImage[] | undefined>(
     props.response
   );
-
   const [querySearchedImage, setQuerySearchedImage] = useState<string>();
   const [counterPage, setCounterPage] = useState<number>(1);
 
   const imagesRender = images?.map((image) => {
     return (
       <div key={image.id} className="max-w-[200px]">
-        {/* <Image
-          className="rounded-md h-full object-cover"
-          key={image.id}
-          src={image.urls.small}
-          loading="lazy"
-          alt=""
-          width="10"
-          height="10"
-        ></Image> */}
         <img
           className="rounded-md h-full object-cover"
           src={image.urls.small}
@@ -61,6 +51,7 @@ export default function Home(props: Props) {
             if (querySearchedImage) {
               getSearchedImages(querySearchedImage).then((data) => {
                 setImages(data?.results);
+                setCounterPage(1);
               });
             }
           }}
@@ -79,18 +70,32 @@ export default function Home(props: Props) {
           onclick={() => {
             const nextPage = counterPage + 1;
             setCounterPage(nextPage);
+            if (querySearchedImage) {
+              getSearchedImages(querySearchedImage, nextPage).then((data) => {
+                let newPhotos: ResponseImage[] = [];
 
-            getImages(nextPage).then((data) => {
-              let newPhotos: ResponseImage[] = [];
-              if (images) {
-                newPhotos = [...images];
-              }
+                if (images) {
+                  newPhotos = [...images];
+                }
 
-              if (data) {
-                newPhotos = [...newPhotos, ...data];
-              }
-              setImages(newPhotos);
-            });
+                if (data) {
+                  newPhotos = [...newPhotos, ...data.results];
+                }
+                setImages(newPhotos);
+              });
+            } else {
+              getImages(nextPage).then((data) => {
+                let newPhotos: ResponseImage[] = [];
+                if (images) {
+                  newPhotos = [...images];
+                }
+
+                if (data) {
+                  newPhotos = [...newPhotos, ...data];
+                }
+                setImages(newPhotos);
+              });
+            }
           }}
         />
       </div>
