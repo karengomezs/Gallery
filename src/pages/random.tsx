@@ -20,21 +20,32 @@ export default function Random(props: Props) {
   );
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="font-extrabold from-neutral-800 font-">
-        Here is your random photo
+    <main className="flex min-h-screen flex-col items-center py-10">
+      <h1 className="font-bold text-3xl text-emerald-700 pb-10">
+        Here is your random photo!
       </h1>
-      {imageRandom && (
-        <Link href="/">
-          <Button
-            name="Go Back Home"
-            onclick={() => {
-              setImageRandom(undefined);
-            }}
-          />
-        </Link>
-      )}
-      <img src={imageRandom?.urls.small} />
+      <div className="flex gap-2">
+        <Button
+          name="Reload 🔄️"
+          onclick={() => {
+            getImageRandom().then((data) => {
+              setImageRandom(data);
+            });
+          }}
+        />
+        {imageRandom && (
+          <Link href="/">
+            <Button
+              name="Go Back Home"
+              onclick={() => {
+                setImageRandom(undefined);
+              }}
+            />
+          </Link>
+        )}
+      </div>
+
+      <img className="pt-10" src={imageRandom?.urls.small} />
     </main>
   );
 }

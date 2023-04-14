@@ -35,7 +35,7 @@ export default function Home(props: Props) {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between px-20 pb-10">
+    <main className="flex min-h-screen flex-col items-center px-20 pb-10">
       <nav className="bg-gray-900 w-screen px-40 py-5 mb-10 flex gap-4">
         <input
           onChange={(e) => {
