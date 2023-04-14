@@ -4,6 +4,7 @@ import { getImages } from "@/api/images-landing";
 import { getSearchedImages } from "@/api/image-search";
 import { Button } from "@/components/Button";
 import Link from "next/link";
+import Image from "next/image";
 
 export const getServerSideProps = async () => {
   const response = await getImages(1);
@@ -23,10 +24,18 @@ export default function Home(props: Props) {
 
   const imagesRender = images?.map((image) => {
     return (
-      <div className="max-w-[200px]">
-        <img
+      <div key={image.id} className="max-w-[200px]">
+        {/* <Image
           className="rounded-md h-full object-cover"
           key={image.id}
+          src={image.urls.small}
+          loading="lazy"
+          alt=""
+          width="10"
+          height="10"
+        ></Image> */}
+        <img
+          className="rounded-md h-full object-cover"
           src={image.urls.small}
           loading="lazy"
         />

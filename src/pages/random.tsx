@@ -2,6 +2,7 @@ import { ResponseImage } from "@/types/response-image";
 import { getImageRandom } from "@/api/image-random";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/Button";
 
 export const getServerSideProps = async () => {
@@ -45,6 +46,14 @@ export default function Random(props: Props) {
         )}
       </div>
       <div className="flex gap-4">
+        {/* <Image
+          className="rounded-md flex-grow"
+          // Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement></DetailedHTMLProps>
+          src={imageRandom?.urls.small}
+          alt=""
+          // width="50"
+          // height="10"
+        ></Image> */}
         <img className="rounded-md flex-grow" src={imageRandom?.urls.small} />
         <div className="rounded-md flex flex-col flex-grow max-h-[200px] max-w-[400px] p-4 justify-center bg-slate-50">
           <p>
