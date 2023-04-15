@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ResponseImage } from "@/types/response-image";
 import { getImages } from "@/api/images-landing";
 import { getSearchedImages } from "@/api/image-search";
-import { ResponseSearchedImage } from "@/types/response-searched-image";
 import { Button } from "@/components/Button";
 import Link from "next/link";
 
@@ -34,13 +33,13 @@ export default function Home(props: Props) {
   });
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-20 pb-10">
+    <main className="flex min-h-screen flex-col items-center px-20 pb-10 bg-slate-200">
       <nav className="bg-gray-900 w-screen px-40 py-5 mb-10 flex gap-4">
         <input
           onChange={(e) => {
             setQuerySearchedImage(e?.target?.value);
           }}
-          className=" h-9 rounded bg-slate-100 border-slate-400 border-2 px-2"
+          className=" h-9 rounded bg-slate-100 border-slate-700 border-2 px-2"
           type="text"
           placeholder="Search Image"
         />
